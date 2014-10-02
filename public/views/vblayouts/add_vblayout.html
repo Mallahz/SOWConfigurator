@@ -1,0 +1,20 @@
+<div class="modal-dialog">
+    <div class="modal-content">
+		<div class="modal-header">
+		  <h3>Add Verbiage Block Layout</h3>
+		</div>
+		<div class="modal-body">
+		  <h5 style="color:red;">All fields are required</h5>
+		  <p><b>Verbiage Block Id: </b><input ng-model="items.vbId"/></p>
+		  <p><b>Verbiage Block Name: </b><input ng-model="items.name" style="width: 250px;"/></p>
+		  <p><b>Binding Name: </b><input ng-model="items.bindingname"/></p>
+		  <p><b>XML File Location: </b>C:\Dev\Mean\AppContent\XML\VerbiageBlocks\ <input ng-model="items.vbFileLoc" style="width: 100px;"/>.xml</p>
+		</div>
+		</div>
+
+		<div class="modal-footer">
+		  <button ng-click="ok()" class="btn btn-primary">Add</button>
+		  <button ng-click="cancel()" class="btn btn-primary" >Cancel</button>
+		</div>
+	</div>
+</div>

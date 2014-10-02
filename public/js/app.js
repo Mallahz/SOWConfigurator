@@ -1,0 +1,1 @@
+angular.module('sowConfigApp', ['ngRoute', 'appRoutes', 'MainCtrl', 'SOWLayoutSVC','ngGrid', 'ui.bootstrap']);

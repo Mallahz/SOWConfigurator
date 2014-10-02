@@ -1,0 +1,19 @@
+<div class="modal-dialog">
+    <div class="modal-content">
+		<div class="modal-header">
+		  <h3>Edit Section Layout</h3>
+		</div>
+
+		<div class="modal-body">
+		  <!-- <p>Name: <input ng-model="items.layoutname"/></p> -->
+		  <p>Section Id: <input ng-model="items.secId"/></p>
+		  <p>Section Name: <input ng-model="items.secName" style="width: 250px;"/></p>
+		  <p>XML File Location: C:\Dev\Mean\AppContent\XML\Sections\<input ng-model="items.secFileLoc" style="width: 200px;"/>.xml</p>
+		</div>
+
+		<div class="modal-footer">
+		  <button ng-click="ok()" class="btn btn-primary">Update</button>
+		  <button ng-click="cancel()" class="btn btn-primary">Cancel</button>
+		</div>
+	</div>
+</div>
