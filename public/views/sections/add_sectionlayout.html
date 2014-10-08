@@ -4,15 +4,18 @@
 		  <h3>Add Section Layout</h3>
 		</div>
 		<div class="modal-body">
-		  <p><b>Section Id: </b><input ng-model="items.secId"/></p>
-		  <p><b>Section Name: </b><input ng-model="items.secName" style="width: 250px;"/></p>
-		  <p><b>XML File Location: </b>C:\Dev\Mean\AppContent\XML\Sections\<input ng-model="items.secFileLoc" style="width: 100px;"/></p>
-		</div>
-		</div>
+			<form ng-submit="ok()">
+			    <div><label>Section Id: </label><input ng-model="items.secId" required/></div>
+			    <div><label>Section Name: <input ng-model="items.secName" style="width: 250px;" required/></div>
+			    <div><label>XML File Location: </label>D:\Apps\SOWConfigurator\AppContent\XML\Sections\ <input ng-model="items.secFileLoc" style="width: 200px;" required/>.xml</div>
 
-		<div class="modal-footer">
-		  <button ng-click="ok()" class="btn btn-primary">Add</button>
-		  <button ng-click="cancel()" class="btn btn-primary" >Cancel</button>
+			    <!-- Buttons -->
+			    <div class="modal-footer">
+		  			<button type="button" ng-click="ok()" class="btn btn-primary">Add</button>
+		  			<button type="button" ng-click="cancel()" class="btn">Cancel</button>
+				</div>
+			</form>
 		</div>
+		
 	</div>
 </div>
