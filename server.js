@@ -196,6 +196,19 @@ router.route('/sowlayout/:_id')
 		});
 	});
 
+
+//get one SOW Layout. Called from the SOW Generator task pane (access at GET http://localhost:8080/api/sowlayout/getone/:layoutname)
+router.route('/sowlayout/getone/:layoutname')
+
+	.get(function(req, res) {
+		sowlayout.find({"layoutname":req.params.layoutname}, function(err, layout){
+			if (err)
+				res.send(err);
+			//layout = "?(" + layout + ")"
+			res.jsonp(layout);
+		});
+	})
+
 // ====================================================
 //  Section layouts route
 // ====================================================
@@ -441,7 +454,7 @@ router.route('/pmlayout/:_id')
 
 	// delete the PM Layout with this pmId (access at DELETE http://localhost:8080/api/pmlayout/:_id)
 	.delete(function(req, res){
-		vblayout.remove({"_id": ObjectId(req.params._id)}, function (err, layout) {
+		pmlayout.remove({"_id": ObjectId(req.params._id)}, function (err, layout) {
 			if (err)
 				res.send(err);
 			res.json({message: 'Successfully deleted'});
@@ -456,8 +469,8 @@ router.route('/pmlayout/getone/:pmname')
 		pmlayout.find({"name": req.params.pmname},function(err, layout) {
 			if (err)
 				res.send(err);
-
-			res.json(layout);
+			//layout = "?(" + layout + ")"
+			res.jsonp(layout);
 		});
 	});
 
@@ -533,6 +546,8 @@ router.route('/vblayout/:_id')
 				layout.vbId = vbId;
 			if (name)
 				layout.name = name;   //update section name
+			if (bindingname)
+				layout.bindingname = bindingname;  //update bindingname
 			if (filename)
 				console.log("filename: " + filename);
 				filedata = fs.readFileSync('./AppContent/XML/VerbiageBlocks/' + filename + '.xml', "utf-8" );
