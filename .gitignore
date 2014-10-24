@@ -1,0 +1,4 @@
+# exclude mongo dump files
+dump
+# exclude node modules
+node_modules
