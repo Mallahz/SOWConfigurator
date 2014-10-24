@@ -86,6 +86,10 @@ angular.module('pmCTRL', ['PMsvc'])
     };
     // End ng-grid config =====================================
 
+     function refresh(){
+    	$scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
+    };
+
     // Edit modal
     $scope.editlayout = function(row) {
 	    var modalInstance = $modal.open({
@@ -98,9 +102,13 @@ angular.module('pmCTRL', ['PMsvc'])
 	    	}
 	    });
 
+	 	//refresh ng-grid on success or cancellation of form
 	 	modalInstance.result.then(
 	 		function (){
-	 			$scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
+	 			refresh();
+			},
+			function(){
+				refresh();
 			}
 	 	);
 	};
@@ -117,11 +125,15 @@ angular.module('pmCTRL', ['PMsvc'])
 			}
 		});
 
-		modalInstance.result.then(
+		//refresh ng-grid on success or cancellation of form
+	 	modalInstance.result.then(
 	 		function (){
-				$scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);	
+	 			refresh();
+			},
+			function(){
+				refresh();
 			}
-		);
+	 	);
 	}
 
 	//Add Layout
@@ -136,11 +148,15 @@ angular.module('pmCTRL', ['PMsvc'])
 			}
 		});
 
-		modalInstance.result.then(
+		//refresh ng-grid on success or cancellation of form
+	 	modalInstance.result.then(
+	 		function (){
+	 			refresh();
+			},
 			function(){
-				$scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
+				refresh();
 			}
-		);
+	 	);
 	}
 })
 
@@ -155,8 +171,8 @@ angular.module('pmCTRL', ['PMsvc'])
 		console.log("$scope.data.pmname: " + $scope.data.name + " $scope.data.pmFileLoc: " + $scope.data.pmFileLoc);
 		pmsvc.update($scope.id, $scope.data)
 			.success(function(){
-				$modalInstance.close();
-				alert("Project Management Layout has been updated");	
+				$modalInstance.close();	
+				alert("Verbiage Block Layout has been updated");
 			});
   	};
 

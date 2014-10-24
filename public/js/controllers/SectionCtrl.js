@@ -19,7 +19,7 @@ angular.module('SecCTRL', ['SectionSvc'])
     
     $scope.pagingOptions = {
         pageSizes: [20, 50, 100],
-        pageSize: 100,
+        pageSize: 20,
         totalServerItems: 0,
         currentPage: 1
     };  
@@ -78,15 +78,19 @@ angular.module('SecCTRL', ['SectionSvc'])
         totalServerItems:'totalServerItems',
         pagingOptions: $scope.pagingOptions,
         filterOptions: $scope.filterOptions,
-        width: 200,
+        // width: 200,
         columnDefs: [
-			{field: 'secId', displayName: 'Section Id'},
-			{field: 'secName', displayName: 'Section Name'},
-			{field: 'secFileLoc', displayName: 'File Location'},
-			{displayName: 'Edit/Delete', cellTemplate: '<i title=Edit Layout" class="fa fa-pencil-square-o" ng-click="editlayout(row)" style="margin-right: 10px;"></i><i title=Delete Layout" ng-click="deleteRecord(row)" class="fa fa-trash-o" style="margin: 0 5 0 5;"</i>'}
+			{field: 'secId', displayName: 'Section Id', width: 100},
+			{field: 'secName', displayName: 'Section Name', width: 350},
+			{field: 'secFileLoc', displayName: 'File Location', width: 350},
+			{displayName: 'Edit/Delete', cellTemplate: '<i title=Edit Layout" class="fa fa-pencil-square-o" ng-click="editlayout(row)" style="margin-right: 10px;"></i><i title=Delete Layout" ng-click="deleteRecord(row)" class="fa fa-trash-o" style="margin: 0 5 0 5;"</i>', width: 100}
 		]
     };
     // End ng-grid config =====================================
+
+    function refresh(){
+    	$scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
+    };
 
     // Edit modal
     $scope.editlayout = function(row) {
@@ -100,9 +104,13 @@ angular.module('SecCTRL', ['SectionSvc'])
 	    	}
 	    });
 
+	 	//refresh ng-grid on success or cancellation of form
 	 	modalInstance.result.then(
 	 		function (){
-	 			$scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
+	 			refresh();
+			},
+			function(){
+				refresh();
 			}
 	 	);
 	};
@@ -119,11 +127,15 @@ angular.module('SecCTRL', ['SectionSvc'])
 			}
 		});
 
+		//refresh ng-grid on success or cancellation of form
 		modalInstance.result.then(
 	 		function (){
-				$scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);	
+	 			refresh();
+			},
+			function(){
+				refresh();
 			}
-		);
+	 	);
 	}
 
 	//Add Layout
@@ -138,11 +150,15 @@ angular.module('SecCTRL', ['SectionSvc'])
 			}
 		});
 
+		//refresh ng-grid on success or cancellation of form
 		modalInstance.result.then(
+	 		function (){
+	 			refresh();
+			},
 			function(){
-				$scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
+				refresh();
 			}
-		);
+	 	);
 	}
 })
 
@@ -185,14 +201,13 @@ angular.module('SecCTRL', ['SectionSvc'])
 	};
 })
 
-// Controller for Adding a SOW Layout
+// Controller for Adding a Section Layout
 .controller('AddSecLayout', function AddSecController($scope, sectionsvc, $modalInstance, items){
 	$scope.items = items;
 	$scope.data = {};
 
 	$scope.ok = function () {
 		$scope.data = angular.copy(items);
-		//console.log("id: " + $scope.data.secId + " name: " + $scope.data.secName + " fileloc: " + $scope.data.secFileLoc);
 		sectionsvc.create($scope.data).success(function(){
 			$modalInstance.close();
 			alert("New Section Layout has been added");

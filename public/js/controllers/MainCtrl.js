@@ -82,6 +82,11 @@ angular.module('MainCtrl', [])
 			//{displayName: 'Delete', cellTemplate}
 		]
     };
+// End ng-grid config =====================================
+
+     function refresh(){
+    	$scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
+    };
 
     // Edit modal
     $scope.editlayout = function(row) {
@@ -95,9 +100,13 @@ angular.module('MainCtrl', [])
 	    	}
 	    });
 
+	 	//refresh ng-grid on success or cancellation of form
 	 	modalInstance.result.then(
 	 		function (){
-	 			$scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
+	 			refresh();
+			},
+			function(){
+				refresh();
 			}
 	 	);
 	};
@@ -114,11 +123,15 @@ angular.module('MainCtrl', [])
 			}
 		});
 
-		modalInstance.result.then(
+		//refresh ng-grid on success or cancellation of form
+	 	modalInstance.result.then(
 	 		function (){
-				$scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);	
+	 			refresh();
+			},
+			function(){
+				refresh();
 			}
-		);
+	 	);
 	}
 
 	//Add Layout
@@ -133,11 +146,15 @@ angular.module('MainCtrl', [])
 			}
 		});
 
-		modalInstance.result.then(
+		//refresh ng-grid on success or cancellation of form
+	 	modalInstance.result.then(
+	 		function (){
+	 			refresh();
+			},
 			function(){
-				$scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
+				refresh();
 			}
-		);
+	 	);
 	}
 })
 

@@ -19,7 +19,7 @@ angular.module('vbCTRL', ['VBsvc'])
     
     $scope.pagingOptions = {
         pageSizes: [20, 50, 100],
-        pageSize: 100,
+        pageSize: 20,
         totalServerItems: 0,
         currentPage: 1
     };  
@@ -89,6 +89,10 @@ angular.module('vbCTRL', ['VBsvc'])
     };
     // End ng-grid config =====================================
 
+    function refresh(){
+    	$scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
+    };
+
     // Edit modal
     $scope.editlayout = function(row) {
 	    var modalInstance = $modal.open({
@@ -101,9 +105,13 @@ angular.module('vbCTRL', ['VBsvc'])
 	    	}
 	    });
 
+	 	//refresh ng-grid on success or cancellation of form
 	 	modalInstance.result.then(
 	 		function (){
-	 			$scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
+	 			refresh();
+			},
+			function(){
+				refresh();
 			}
 	 	);
 	};
@@ -120,11 +128,15 @@ angular.module('vbCTRL', ['VBsvc'])
 			}
 		});
 
+		//refresh ng-grid on success or cancellation of form
 		modalInstance.result.then(
 	 		function (){
-				$scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);	
+	 			refresh();
+			},
+			function(){
+				refresh();
 			}
-		);
+	 	);
 	}
 
 	//Add Layout
@@ -139,11 +151,15 @@ angular.module('vbCTRL', ['VBsvc'])
 			}
 		});
 
+		//refresh ng-grid on success or cancellation of form
 		modalInstance.result.then(
+	 		function (){
+	 			refresh();
+			},
 			function(){
-				$scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage);
+				refresh();
 			}
-		);
+	 	);
 	}
 })
 
@@ -154,8 +170,9 @@ angular.module('vbCTRL', ['VBsvc'])
 	$scope.data = {};
 
 	$scope.ok = function () {
+		event.preventDefault();
 		$scope.data = angular.copy($scope.items);
-		console.log("scope.data.vbId: " + $scope.data.vbId + ' $scope.data.vbname: ' + $scope.data.name + " $scope.data.vbFileLoc: " + $scope.data.vbFileLoc);
+		console.log("scope.data.vbId: " + $scope.data.vbId + ' $scope.data.vbname: ' + $scope.data.name + " $scope.data.vbFileLoc: " + $scope.data.vbFileLoc + " bindingname: " + $scope.data.bindingname);
 		vbsvc.update($scope.id, $scope.data)
 			.success(function(){
 				$modalInstance.close();
