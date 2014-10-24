@@ -149,11 +149,7 @@ router.route('/sowlayout')
 		});
     })
 
-<<<<<<< HEAD
-// on routes that end in /sowlayout/:id
-=======
 // on routes that end in /sowlayout/:idS
->>>>>>> 9a15c64a386f15052481b99d9010effe3c449be4
 router.route('/sowlayout/:_id')
 	
 	// get SOW Layout with the layoutname (accessed at GET http://localhost:8080/api/sowlayout/:layoutname)
@@ -200,8 +196,6 @@ router.route('/sowlayout/:_id')
 		});
 	});
 
-<<<<<<< HEAD
-=======
 
 //get one SOW Layout. Called from the SOW Generator task pane (access at GET http://localhost:8080/api/sowlayout/getone/:layoutname)
 router.route('/sowlayout/getone/:layoutname')
@@ -215,7 +209,6 @@ router.route('/sowlayout/getone/:layoutname')
 		});
 	})
 
->>>>>>> 9a15c64a386f15052481b99d9010effe3c449be4
 // ====================================================
 //  Section layouts route
 // ====================================================
@@ -383,11 +376,7 @@ app.get("/sections", function (req, res) {
 // ====================================================
 router.route('/pmlayout')
 
-<<<<<<< HEAD
-// get all Project Management layouts (access at GET http://localhost:8080/api/pmlayout)
-=======
 // get all Project Management layouts (access at GET http://localhost:8080/api/sectionlayout)
->>>>>>> 9a15c64a386f15052481b99d9010effe3c449be4
 	.get(function(req, res) {
 		pmlayout.find({},{name:1, pmFileLoc:1}, function(err, layout) {
 			if (err)
@@ -465,11 +454,7 @@ router.route('/pmlayout/:_id')
 
 	// delete the PM Layout with this pmId (access at DELETE http://localhost:8080/api/pmlayout/:_id)
 	.delete(function(req, res){
-<<<<<<< HEAD
-		vblayout.remove({"_id": ObjectId(req.params._id)}, function (err, layout) {
-=======
 		pmlayout.remove({"_id": ObjectId(req.params._id)}, function (err, layout) {
->>>>>>> 9a15c64a386f15052481b99d9010effe3c449be4
 			if (err)
 				res.send(err);
 			res.json({message: 'Successfully deleted'});
@@ -484,13 +469,8 @@ router.route('/pmlayout/getone/:pmname')
 		pmlayout.find({"name": req.params.pmname},function(err, layout) {
 			if (err)
 				res.send(err);
-<<<<<<< HEAD
-
-			res.json(layout);
-=======
 			//layout = "?(" + layout + ")"
 			res.jsonp(layout);
->>>>>>> 9a15c64a386f15052481b99d9010effe3c449be4
 		});
 	});
 
@@ -509,11 +489,7 @@ router.route('/vblayout')
 		});
 	})
 
-<<<<<<< HEAD
-	// create new VB layouts
-=======
 	// create new PM layouts
->>>>>>> 9a15c64a386f15052481b99d9010effe3c449be4
 	.post(function(req, res) {
 		var vbId = req.body.vbId;
 	    var bindingname = req.body.bindingname;
@@ -570,11 +546,8 @@ router.route('/vblayout/:_id')
 				layout.vbId = vbId;
 			if (name)
 				layout.name = name;   //update section name
-<<<<<<< HEAD
-=======
 			if (bindingname)
 				layout.bindingname = bindingname;  //update bindingname
->>>>>>> 9a15c64a386f15052481b99d9010effe3c449be4
 			if (filename)
 				console.log("filename: " + filename);
 				filedata = fs.readFileSync('./AppContent/XML/VerbiageBlocks/' + filename + '.xml', "utf-8" );
