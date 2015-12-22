@@ -79,7 +79,7 @@ angular.module('pmCTRL', ['PMsvc'])
         filterOptions: $scope.filterOptions,
         width: 200,
         columnDefs: [
-			{field: 'name', displayName: 'Verbiage Block Name'},
+			{field: 'name', displayName: 'Project Name'},
 			{field: 'pmFileLoc', displayName: 'File Location'},
 			{displayName: 'Edit/Delete', cellTemplate: '<i title=Edit Layout" class="fa fa-pencil-square-o" ng-click="editlayout(row)" style="margin-right: 10px;"></i><i title=Delete Layout" ng-click="deleteRecord(row)" class="fa fa-trash-o" style="margin: 0 5 0 5;"</i>'}
 		]
@@ -172,7 +172,7 @@ angular.module('pmCTRL', ['PMsvc'])
 		pmsvc.update($scope.id, $scope.data)
 			.success(function(){
 				$modalInstance.close();	
-				alert("Verbiage Block Layout has been updated");
+				alert("Project Management Layout has been updated");
 			});
   	};
 
