@@ -1,6 +1,6 @@
 # exclude mongo dump files
-dump
+dump/
 # exclude node modules
 node_modules
 # exclude appcontent folders
-AppContent
+AppContent/

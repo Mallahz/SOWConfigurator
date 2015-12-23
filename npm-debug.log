@@ -1,0 +1,29 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'D:\\Nodejs\\\\node.exe',
+1 verbose cli   'D:\\Nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'start' ]
+2 info using npm@1.4.21
+3 info using node@v0.10.30
+4 verbose node symlink D:\Nodejs\\node.exe
+5 verbose run-script [ 'prestart', 'start', 'poststart' ]
+6 info prestart SOWConfiguratorGeneratorApp@
+7 info start SOWConfiguratorGeneratorApp@
+8 verbose unsafe-perm in lifecycle true
+9 info SOWConfiguratorGeneratorApp@ Failed to exec start script
+10 error SOWConfiguratorGeneratorApp@ start: `node server.js`
+10 error Exit status 8
+11 error Failed at the SOWConfiguratorGeneratorApp@ start script.
+11 error This is most likely a problem with the SOWConfiguratorGeneratorApp package,
+11 error not with npm itself.
+11 error Tell the author that this fails on your system:
+11 error     node server.js
+11 error You can get their info via:
+11 error     npm owner ls SOWConfiguratorGeneratorApp
+11 error There is likely additional logging output above.
+12 error System Windows_NT 6.2.9200
+13 error command "D:\\Nodejs\\\\node.exe" "D:\\Nodejs\\node_modules\\npm\\bin\\npm-cli.js" "start"
+14 error cwd D:\Apps\SOWConfigurator
+15 error node -v v0.10.30
+16 error npm -v 1.4.21
+17 error code ELIFECYCLE
+18 verbose exit [ 1, true ]
